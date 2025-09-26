@@ -17,7 +17,6 @@ const UserLayout = (props) => {
         backgroundSize: "30px 30px",
         overflow: "hidden",
 
-        // Gradient nur ::before orqali
         "&::before": {
           content: '""',
           position: "absolute",
@@ -43,7 +42,14 @@ const UserLayout = (props) => {
       }}
     >
       <Navbar />
-      <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1 }}>
+      <Container
+        maxWidth="xl"
+        sx={{
+          position: "relative",
+          zIndex: 1,
+          px: { xs: 2, sm: 3, md: 4 },
+        }}
+      >
         {children}
       </Container>
     </Box>

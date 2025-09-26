@@ -76,8 +76,8 @@ const FeedbackMarquee = ({ data, reverse = false }) => {
       speed={40}
       gradient={false}
       direction={reverse ? "right" : "left"}
-      loop={0} // 0 = infinite
-      pauseOnHover={false} // to‘xtamasin
+      loop={0}
+      pauseOnHover={false}
     >
       {data.map((item) => (
         <ClientFeedbackCard key={item.id} item={item} />
