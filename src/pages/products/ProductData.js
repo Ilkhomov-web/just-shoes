@@ -8,7 +8,7 @@ export const PRODUCTS = [
     img: "/vercel.svg",
     price: 119.99,
     discountPercent: 10,
-    stockStatus: "in_stock", // in_stock | out_of_stock | coming_soon
+    stockStatus: "in_stock", 
   },
   {
     id: "SHOE-002",

@@ -1,18 +1,21 @@
-import { Box, Container, Grid, IconButton, Badge, Drawer, Stack } from '@mui/material'
+import { Box, Container, Grid, Typography, IconButton, Badge, Drawer, Stack } from '@mui/material'
 import React from 'react'
 import Navbar from '../components/ui/Navbar'
 import Filters from '../components/products/Filters'
 import ProductGrid from '../components/products/ProductGrid'
+import CategoryCard from '../components/products/CategoryCard'
 import { PRODUCTS } from './ProductData'
+import { CATEGORIES } from './CategoryData'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import Cart from '../components/products/Cart'
 
 const index = () => {
-  const [filters, setFilters] = React.useState({ price: [0, 250], sizes: [], colors: [], status: 'all', discountOnly: false, sort: 'relevance' })
+  const [filters, setFilters] = React.useState({ price: [0, 250], sizes: [], colors: [], status: 'all', discountOnly: false, sort: 'relevance', category: 'all' })
   const [cartOpen, setCartOpen] = React.useState(false)
   const [filterOpen, setFilterOpen] = React.useState(false)
   const [cart, setCart] = React.useState([])
+  const [selectedCategory, setSelectedCategory] = React.useState('all')
 
   const filtered = React.useMemo(() => {
     let result = PRODUCTS.filter(p => {
@@ -22,7 +25,10 @@ const index = () => {
       const inColor = filters.colors.length ? p.colors?.some(c => filters.colors.includes(c)) : true
       const inStatus = filters.status === 'all' ? true : p.stockStatus === filters.status
       const inDiscount = filters.discountOnly ? (p.discountPercent || 0) > 0 : true
-      return inPrice && inSize && inColor && inStatus && inDiscount
+      const inCategory = selectedCategory === 'all' ? true : 
+        selectedCategory === 'discounted' ? (p.discountPercent || 0) > 0 :
+        p.category === selectedCategory
+      return inPrice && inSize && inColor && inStatus && inDiscount && inCategory
     })
 
     if (filters.sort === 'price_low_high') {
@@ -66,6 +72,22 @@ const index = () => {
             </IconButton>
           </Stack>
         </Box>
+        <Box sx={{ mb: 3 }}>
+          <Typography variant="h5" sx={{ color: 'white', mb: 2, fontWeight: 700 }}>
+            Categories
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 3 }}>
+            {CATEGORIES.map((category) => (
+              <CategoryCard
+                key={category.id}
+                category={category}
+                isSelected={selectedCategory === category.id}
+                onClick={() => setSelectedCategory(category.id)}
+              />
+            ))}
+          </Box>
+        </Box>
+
         <Box sx={{ display: 'flex', gap: 3 }}>
           <Box sx={{ display: { xs: 'none', md: 'block' }, width: 300, flex: '0 0 300px' }}>
             <Filters values={filters} onChange={setFilters} />
