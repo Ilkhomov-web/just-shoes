@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Container, Grid, Card, CardContent, Typography, Button, Stack } from '@mui/material';
 import { useRouter } from 'next/router';
 import Navbar from '../components/ui/Navbar';
+import ProtectedRoute from '../../components/ProtectedRoute';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
@@ -42,13 +43,14 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <Box sx={{
-      minHeight: '100vh',
-      backgroundColor: '#0a0a0a',
-      backgroundImage: 'radial-gradient(circle at 20% 10%, rgba(255,165,0,0.15), transparent 35%), radial-gradient(circle at 80% 20%, rgba(255,0,0,0.1), transparent 35%)'
-    }}>
-      <Navbar />
-      <Container maxWidth="xl" sx={{ mt: 3 }}>
+    <ProtectedRoute requireAdmin={true}>
+      <Box sx={{
+        minHeight: '100vh',
+        backgroundColor: '#0a0a0a',
+        backgroundImage: 'radial-gradient(circle at 20% 10%, rgba(255,165,0,0.15), transparent 35%), radial-gradient(circle at 80% 20%, rgba(255,0,0,0.1), transparent 35%)'
+      }}>
+        <Navbar />
+        <Container maxWidth="xl" sx={{ mt: 3 }}>
         <Typography variant="h4" sx={{ color: 'white', mb: 4, fontWeight: 700 }}>
           Admin Dashboard
         </Typography>
@@ -113,10 +115,25 @@ const AdminDashboard = () => {
             >
               Add Debt
             </Button>
+            <Button
+              variant="contained"
+              onClick={() => router.push('/admin-panel/users')}
+              sx={{ bgcolor: 'blue', '&:hover': { bgcolor: '#1976d2' } }}
+            >
+              Manage Users
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => router.push('/admin-panel/chat')}
+              sx={{ bgcolor: 'purple', '&:hover': { bgcolor: '#7b1fa2' } }}
+            >
+              Chat with Users
+            </Button>
           </Stack>
         </Box>
       </Container>
-    </Box>
+      </Box>
+    </ProtectedRoute>
   );
 };
 

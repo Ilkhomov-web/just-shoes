@@ -10,9 +10,14 @@ import {
 import React from "react";
 import GTranslateIcon from "@mui/icons-material/GTranslate";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../../contexts/AuthContext";
+import { useRouter } from "next/router";
+import { Logout, Chat } from "@mui/icons-material";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
+  const { user, logout, isAuthenticated } = useAuth();
+  const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleOpen = (event) => {
@@ -27,6 +32,11 @@ const Navbar = () => {
   const handleChange = (lng) => {
     i18n.changeLanguage(lng);
     handleClose();
+  };
+
+  const handleLogout = () => {
+    logout();
+    router.push("/");
   };
   return (
     <Box
@@ -60,6 +70,52 @@ const Navbar = () => {
           <Box
             sx={{ display: "flex", gap: { xs: "6px", sm: "8px", md: "10px" } }}
           >
+            {isAuthenticated ? (
+              <>
+                <Button
+                  onClick={() => router.push("/chat")}
+                  sx={{ color: "white", minWidth: "auto" }}
+                >
+                  <Chat />
+                </Button>
+                <Button
+                  onClick={handleLogout}
+                  sx={{ color: "white", minWidth: "auto" }}
+                >
+                  <Logout />
+                </Button>
+                <Avatar sx={{ bgcolor: "orange", width: 32, height: 32 }}>
+                  {user?.userImage ? (
+                    <img
+                      src={user.userImage}
+                      alt={user.firstName}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  ) : (
+                    `${user?.firstName?.[0]}${user?.lastName?.[0]}`
+                  )}
+                </Avatar>
+              </>
+            ) : (
+              <>
+                <Button
+                  onClick={() => router.push("/auth/login")}
+                  sx={{ color: "white" }}
+                >
+                  Login
+                </Button>
+                <Button
+                  onClick={() => router.push("/auth/signup")}
+                  sx={{ color: "white" }}
+                >
+                  Sign Up
+                </Button>
+              </>
+            )}
             <Button
               sx={{
                 position: "relative",

@@ -1,11 +1,10 @@
-import { Box, Container, Grid, Typography, IconButton, Badge, Drawer, Stack } from '@mui/material'
+import { Box, Container, Grid, Typography, IconButton, Badge, Drawer, Stack, CircularProgress } from '@mui/material'
 import React from 'react'
 import Navbar from '../components/ui/Navbar'
 import Filters from '../components/products/Filters'
 import ProductGrid from '../components/products/ProductGrid'
 import CategoryCard from '../components/products/CategoryCard'
-import { PRODUCTS } from './ProductData'
-import { CATEGORIES } from './CategoryData'
+import ProtectedRoute from '../../components/ProtectedRoute'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import Cart from '../components/products/Cart'
@@ -16,9 +15,36 @@ const index = () => {
   const [filterOpen, setFilterOpen] = React.useState(false)
   const [cart, setCart] = React.useState([])
   const [selectedCategory, setSelectedCategory] = React.useState('all')
+  const [products, setProducts] = React.useState([])
+  const [categories, setCategories] = React.useState([])
+  const [loading, setLoading] = React.useState(true)
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [productsRes, categoriesRes] = await Promise.all([
+          fetch('/api/products'),
+          fetch('/api/categories')
+        ]);
+        
+        const productsData = await productsRes.json();
+        const categoriesData = await categoriesRes.json();
+        
+        setProducts(productsData);
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const filtered = React.useMemo(() => {
-    let result = PRODUCTS.filter(p => {
+    let result = products.filter(p => {
       const price = p.price * (1 - (p.discountPercent || 0) / 100)
       const inPrice = price >= filters.price[0] && price <= filters.price[1]
       const inSize = filters.sizes.length ? p.sizes.some(s => filters.sizes.includes(s)) : true
@@ -52,14 +78,33 @@ const index = () => {
   const removeFromCart = (id) => setCart(prev => prev.filter(i => i.id !== id))
   const clearCart = () => setCart([])
 
+  if (loading) {
+    return (
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        backgroundColor: '#0a0a0a'
+      }}>
+        <CircularProgress sx={{ color: 'orange', mb: 2 }} />
+        <Typography variant="h6" sx={{ color: 'white' }}>
+          Loading products...
+        </Typography>
+      </Box>
+    );
+  }
+
   return (
-    <Box sx={{
-      minHeight: '100vh',
-      backgroundColor: '#111',
-      backgroundImage: 'radial-gradient(circle at 20% 10%, rgba(255,170,0,0.20), transparent 35%), radial-gradient(circle at 80% 20%, rgba(255,80,0,0.14), transparent 35%), radial-gradient(circle at 50% 80%, rgba(255,170,0,0.12), transparent 40%)'
-    }}>
-      <Navbar />
-      <Container maxWidth="xl" sx={{ mt: 3 }}>
+    <ProtectedRoute>
+      <Box sx={{
+        minHeight: '100vh',
+        backgroundColor: '#111',
+        backgroundImage: 'radial-gradient(circle at 20% 10%, rgba(255,170,0,0.20), transparent 35%), radial-gradient(circle at 80% 20%, rgba(255,80,0,0.14), transparent 35%), radial-gradient(circle at 50% 80%, rgba(255,170,0,0.12), transparent 40%)'
+      }}>
+        <Navbar />
+        <Container maxWidth="xl" sx={{ mt: 3 }}>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
           <Stack direction="row" spacing={1} alignItems="center">
             <IconButton onClick={() => setFilterOpen(true)} sx={{ color: 'white', display: { xs: 'inline-flex', md: 'none' } }}>
@@ -107,7 +152,8 @@ const index = () => {
         </Box>
       </Drawer>
       <Cart open={cartOpen} onClose={() => setCartOpen(false)} items={cart} onRemove={removeFromCart} onClear={clearCart} />
-    </Box>
+      </Box>
+    </ProtectedRoute>
   )
 }
 
