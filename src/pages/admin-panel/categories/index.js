@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Box, Container, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Stack, Card, CardContent } from '@mui/material';
 import { Edit, Delete, Add } from '@mui/icons-material';
 import { useRouter } from 'next/router';
-import Navbar from '../../components/ui/Navbar';
-import { CATEGORIES } from '../../products/CategoryData';
+import Navbar from '../../../../components/ui/Navbar';
+import { CATEGORIES } from '../../../products/CategoryData';
 
 const CategoriesManagement = () => {
   const router = useRouter();

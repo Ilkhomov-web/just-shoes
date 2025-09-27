@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Container, Grid, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip, IconButton, Stack, Card, CardContent } from '@mui/material';
 import { Delete, Visibility } from '@mui/icons-material';
 import { useRouter } from 'next/router';
-import Navbar from '../../components/ui/Navbar';
+import Navbar from '../../../../components/ui/Navbar';
 
 const OrdersManagement = () => {
   const router = useRouter();

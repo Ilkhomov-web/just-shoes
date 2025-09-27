@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Box, Container, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Stack, Card, CardContent, Avatar, Chip } from '@mui/material';
 import { Edit, Delete, Add } from '@mui/icons-material';
 import { useRouter } from 'next/router';
-import Navbar from '../../../components/ui/Navbar';
-import ProtectedRoute from '../../../../components/ProtectedRoute';
+import Navbar from '../../../../components/ui/Navbar';
+import ProtectedRoute from '../../../../../components/ProtectedRoute';
 
 const UsersManagement = () => {
   const router = useRouter();

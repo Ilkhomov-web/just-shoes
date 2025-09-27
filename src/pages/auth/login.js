@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Container, Typography, TextField, Button, Card, CardContent, Stack, Alert } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../../contexts/AuthContext';
 import Navbar from '../components/ui/Navbar';
 
 const Login = () => {

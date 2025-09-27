@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Box, Container, Typography, TextField, Button, Paper, Avatar, Stack } from '@mui/material';
 import { Send } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
-import ProtectedRoute from '../../components/ProtectedRoute';
-import Navbar from '../components/ui/Navbar';
+import ProtectedRoute from '../../../components/ProtectedRoute';
+import Navbar from '../../components/ui/Navbar';
 
 const UserChat = () => {
   const { user } = useAuth();

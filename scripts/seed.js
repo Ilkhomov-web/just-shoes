@@ -78,7 +78,7 @@ const seedData = async () => {
     const adminUser = new User({
       firstName: 'Admin',
       lastName: 'User',
-      phone: 'laziz2211',
+      phone: '903112211',
       password: '3112211',
       address: 'Admin Address',
       gender: 'male',
@@ -240,7 +240,7 @@ const seedData = async () => {
     }
 
     console.log('Database seeded successfully!');
-    console.log('Admin user created: laziz2211 / 3112211');
+    console.log('Admin user created: 903112211 / 3112211');
     console.log('Categories and products created');
     
   } catch (error) {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Container, Typography, TextField, Button, Grid, Card, CardContent, Stack } from '@mui/material';
 import { useRouter } from 'next/router';
-import Navbar from '../../components/ui/Navbar';
+import Navbar from '../../../../components/ui/Navbar';
 import { PhotoCamera } from '@mui/icons-material';
 
 const AddCategory = () => {

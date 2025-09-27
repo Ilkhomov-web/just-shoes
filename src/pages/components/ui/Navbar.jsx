@@ -10,7 +10,7 @@ import {
 import React from "react";
 import GTranslateIcon from "@mui/icons-material/GTranslate";
 import { useTranslation } from "react-i18next";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../../contexts/AuthContext";
 import { useRouter } from "next/router";
 import { Logout, Chat } from "@mui/icons-material";
 

@@ -1,5 +1,5 @@
-import dbConnect from '../../../lib/mongodb';
-import User from '../../../models/User';
+import dbConnect from '../../../../lib/mongodb';
+import User from '../../../../models/User';
 import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {

@@ -1,5 +1,5 @@
-import dbConnect from '../../../lib/mongodb';
-import Debt from '../../../models/Debt';
+import dbConnect from '../../../../lib/mongodb';
+import Debt from '../../../../models/Debt';
 
 export default async function handler(req, res) {
   await dbConnect();

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Container, Grid, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip, IconButton, Stack, Card, CardContent, Avatar } from '@mui/material';
 import { Delete, Edit, Add } from '@mui/icons-material';
 import { useRouter } from 'next/router';
-import Navbar from '../../components/ui/Navbar';
+import Navbar from '../../../../components/ui/Navbar';
 
 const DebtsManagement = () => {
   const router = useRouter();

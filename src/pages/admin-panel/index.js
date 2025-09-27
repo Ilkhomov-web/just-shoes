@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Container, Grid, Card, CardContent, Typography, Button, Stack } from '@mui/material';
 import { useRouter } from 'next/router';
 import Navbar from '../components/ui/Navbar';
-import ProtectedRoute from '../../components/ProtectedRoute';
+import ProtectedRoute from '../../../components/ProtectedRoute';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';

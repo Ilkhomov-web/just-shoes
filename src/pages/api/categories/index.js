@@ -1,5 +1,5 @@
-import dbConnect from '../../../lib/mongodb';
-import Category from '../../../models/Category';
+import dbConnect from '../../../../lib/mongodb';
+import Category from '../../../../models/Category';
 
 export default async function handler(req, res) {
   await dbConnect();

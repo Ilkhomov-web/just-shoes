@@ -1,5 +1,5 @@
-import dbConnect from '../../../lib/mongodb';
-import Chat from '../../../models/Chat';
+import dbConnect from '../../../../lib/mongodb';
+import Chat from '../../../../models/Chat';
 
 export default async function handler(req, res) {
   await dbConnect();

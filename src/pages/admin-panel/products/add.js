@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Container, Typography, TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem, Chip, Stack, Card, CardContent } from '@mui/material';
 import { useRouter } from 'next/router';
-import Navbar from '../../components/ui/Navbar';
+import Navbar from '../../../../components/ui/Navbar';
 
 const AddProduct = () => {
   const router = useRouter();

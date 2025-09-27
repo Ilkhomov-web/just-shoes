@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import "@/i18n";
-import { AuthProvider } from "../contexts/AuthContext";
+import { AuthProvider } from "../../contexts/AuthContext";
 
 export default function App({ Component, pageProps }) {
   return (

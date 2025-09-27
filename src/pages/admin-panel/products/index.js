@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Box, Container, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip, IconButton, Stack } from '@mui/material';
 import { Edit, Delete, Add } from '@mui/icons-material';
 import { useRouter } from 'next/router';
-import Navbar from '../../components/ui/Navbar';
-import { PRODUCTS } from '../../products/ProductData';
+import Navbar from '../../../../components/ui/Navbar';
+import { PRODUCTS } from '../../../products/ProductData';
 
 const ProductsManagement = () => {
   const router = useRouter();
